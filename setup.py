@@ -3,11 +3,11 @@ from io import open
 from setuptools import find_packages, setup
 
 setup(
-    name="bert_score",
+    name="xtest_bert_score",
     version="0.3.13",
     author="Tianyi Zhang*, Varsha Kishore*, Felix Wu*, Kilian Q. Weinberger, and Yoav Artzi",
     author_email="tzhang@asapp.com",
-    description="PyTorch implementation of BERT score",
+    description="PyTorch implementation of BERT score for xtest",
     long_description=open("README.md", "r", encoding="utf-8").read(),
     long_description_content_type="text/markdown",
     keywords="BERT NLP deep learning google metric",
@@ -26,8 +26,8 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "bert-score=bert_score_cli.score:main",
-            "bert-score-show=bert_score_cli.visualize:main",
+            "bert-score=xtest_bert_score_cli.score:main",
+            "bert-score-show=xtest_bert_score_cli.visualize:main",
         ]
     },
     include_package_data=True,

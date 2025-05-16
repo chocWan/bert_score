@@ -6,7 +6,7 @@ from collections import defaultdict
 
 import torch
 
-import bert_score
+import xtest_bert_score
 
 
 def main():
@@ -62,7 +62,7 @@ def main():
 
     args = parser.parse_args()
 
-    bert_score.plot_example(
+    xtest_bert_score.plot_example(
         args.cand,
         args.ref,
         model_type=args.model,

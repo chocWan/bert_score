@@ -11,7 +11,7 @@ import sacrebleu
 import torch
 from tqdm.auto import tqdm
 
-import bert_score
+import xtest_bert_score
 
 
 def get_data(lang="en"):
@@ -67,7 +67,7 @@ if __name__ == "__main__":
             continue
         else:
             print(f"computing baseline for {model_type} on {args.lang}")
-            scorer = bert_score.BERTScorer(model_type=model_type, all_layers=True)
+            scorer = xtest_bert_score.BERTScorer(model_type=model_type, all_layers=True)
             with torch.no_grad():
                 score_means = None
                 count = 0

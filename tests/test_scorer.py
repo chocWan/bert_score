@@ -2,7 +2,7 @@ import unittest
 
 from transformers import __version__ as ht_version
 
-import bert_score
+import xtest_bert_score
 from tests.custom_assertions import CustomAssertions
 
 cands = [
@@ -19,7 +19,7 @@ refs = [
 
 class TestScore(unittest.TestCase, CustomAssertions):
     def test_scorer(self):
-        scorer = bert_score.BERTScorer(lang="en", batch_size=3)
+        scorer = xtest_bert_score.BERTScorer(lang="en", batch_size=3)
 
         (P, R, F), hash_code = scorer.score(cands, refs, return_hash=True)
         self.assertAreTensors(P, R, F)
@@ -34,11 +34,11 @@ class TestScore(unittest.TestCase, CustomAssertions):
         )
         self.assertEqual(
             hash_code,
-            f"roberta-large_L17_no-idf_version={bert_score.__version__}(hug_trans={ht_version})",
+            f"roberta-large_L17_no-idf_version={xtest_bert_score.__version__}(hug_trans={ht_version})",
         )
 
     def test_idf_scorer(self):
-        scorer = bert_score.BERTScorer(
+        scorer = xtest_bert_score.BERTScorer(
             lang="en", idf=True, idf_sents=refs, batch_size=3
         )
 
@@ -55,11 +55,11 @@ class TestScore(unittest.TestCase, CustomAssertions):
         )
         self.assertEqual(
             hash_code,
-            f"roberta-large_L17_idf_version={bert_score.__version__}(hug_trans={ht_version})",
+            f"roberta-large_L17_idf_version={xtest_bert_score.__version__}(hug_trans={ht_version})",
         )
 
     def test_scorer_rescale(self):
-        scorer = bert_score.BERTScorer(
+        scorer = xtest_bert_score.BERTScorer(
             lang="en", rescale_with_baseline=True, batch_size=3
         )
 
@@ -76,11 +76,11 @@ class TestScore(unittest.TestCase, CustomAssertions):
         )
         self.assertEqual(
             hash_code,
-            f"roberta-large_L17_no-idf_version={bert_score.__version__}(hug_trans={ht_version})-rescaled",
+            f"roberta-large_L17_no-idf_version={xtest_bert_score.__version__}(hug_trans={ht_version})-rescaled",
         )
 
     def test_idf_scorer_rescale(self):
-        scorer = bert_score.BERTScorer(
+        scorer = xtest_bert_score.BERTScorer(
             lang="en",
             rescale_with_baseline=True,
             idf=True,
@@ -101,11 +101,11 @@ class TestScore(unittest.TestCase, CustomAssertions):
         )
         self.assertEqual(
             hash_code,
-            f"roberta-large_L17_idf_version={bert_score.__version__}(hug_trans={ht_version})-rescaled",
+            f"roberta-large_L17_idf_version={xtest_bert_score.__version__}(hug_trans={ht_version})-rescaled",
         )
 
     def test_multi_refs(self):
-        scorer = bert_score.BERTScorer(
+        scorer = xtest_bert_score.BERTScorer(
             lang="en", batch_size=3, rescale_with_baseline=True
         )
 
@@ -124,7 +124,7 @@ class TestScore(unittest.TestCase, CustomAssertions):
         self.assertTensorsAlmostEqual(F_mul, F_best)
 
     def test_multi_refs_working(self):
-        scorer = bert_score.BERTScorer(
+        scorer = xtest_bert_score.BERTScorer(
             lang="en", batch_size=3, rescale_with_baseline=True
         )
 

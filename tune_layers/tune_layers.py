@@ -8,7 +8,7 @@ import torch
 from scipy.stats import pearsonr
 from tqdm.auto import tqdm, trange
 
-import bert_score
+import xtest_bert_score
 
 
 def get_wmt16(lang_pair, data_folder="wmt16"):
@@ -80,7 +80,7 @@ def main():
     networks = args.model
     for network in networks:
         model_type = network
-        scorer = bert_score.scorer.BERTScorer(
+        scorer = xtest_bert_score.scorer.BERTScorer(
             model_type=model_type, num_layers=100, idf=False, all_layers=True
         )
         results = defaultdict(dict)

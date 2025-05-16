@@ -92,7 +92,8 @@ def score(
         lang = lang.lower()
         model_type = lang2model[lang]
     if num_layers is None:
-        num_layers = model2layers[model_type]
+        model_name = model_type.split('/')[-1]
+        num_layers = model2layers[model_name]
 
     tokenizer = get_tokenizer(model_type, use_fast_tokenizer)
     model = get_model(model_type, num_layers, all_layers)

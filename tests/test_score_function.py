@@ -2,7 +2,7 @@ import unittest
 
 from transformers import __version__ as ht_version
 
-import bert_score
+import xtest_bert_score
 from tests.custom_assertions import CustomAssertions
 
 cands = [
@@ -19,7 +19,7 @@ refs = [
 
 class TestScore(unittest.TestCase, CustomAssertions):
     def test_score(self):
-        (P, R, F), hash_code = bert_score.score(
+        (P, R, F), hash_code = xtest_bert_score.score(
             cands,
             refs,
             model_type="roberta-large",
@@ -40,11 +40,11 @@ class TestScore(unittest.TestCase, CustomAssertions):
         )
         self.assertEqual(
             hash_code,
-            f"roberta-large_L17_no-idf_version={bert_score.__version__}(hug_trans={ht_version})",
+            f"roberta-large_L17_no-idf_version={xtest_bert_score.__version__}(hug_trans={ht_version})",
         )
 
     def test_idf_score(self):
-        (P, R, F), hash_code = bert_score.score(
+        (P, R, F), hash_code = xtest_bert_score.score(
             cands,
             refs,
             model_type="roberta-large",
@@ -66,11 +66,11 @@ class TestScore(unittest.TestCase, CustomAssertions):
 
         self.assertEqual(
             hash_code,
-            f"roberta-large_L17_idf_version={bert_score.__version__}(hug_trans={ht_version})",
+            f"roberta-large_L17_idf_version={xtest_bert_score.__version__}(hug_trans={ht_version})",
         )
 
     def test_score_rescale(self):
-        (P, R, F), hash_code = bert_score.score(
+        (P, R, F), hash_code = xtest_bert_score.score(
             cands,
             refs,
             model_type="roberta-large",
@@ -94,11 +94,11 @@ class TestScore(unittest.TestCase, CustomAssertions):
 
         self.assertEqual(
             hash_code,
-            f"roberta-large_L17_no-idf_version={bert_score.__version__}(hug_trans={ht_version})-rescaled",
+            f"roberta-large_L17_no-idf_version={xtest_bert_score.__version__}(hug_trans={ht_version})-rescaled",
         )
 
     def test_idf_score_rescale(self):
-        (P, R, F), hash_code = bert_score.score(
+        (P, R, F), hash_code = xtest_bert_score.score(
             cands,
             refs,
             model_type="roberta-large",
@@ -122,11 +122,11 @@ class TestScore(unittest.TestCase, CustomAssertions):
 
         self.assertEqual(
             hash_code,
-            f"roberta-large_L17_idf_version={bert_score.__version__}(hug_trans={ht_version})-rescaled",
+            f"roberta-large_L17_idf_version={xtest_bert_score.__version__}(hug_trans={ht_version})-rescaled",
         )
 
     def test_idf_score_rescale_fast_tokenizer(self):
-        (P, R, F), hash_code = bert_score.score(
+        (P, R, F), hash_code = xtest_bert_score.score(
             cands,
             refs,
             model_type="roberta-large",
@@ -151,13 +151,13 @@ class TestScore(unittest.TestCase, CustomAssertions):
 
         self.assertEqual(
             hash_code,
-            f"roberta-large_L17_idf_version={bert_score.__version__}(hug_trans={ht_version})-rescaled_fast-tokenizer",
+            f"roberta-large_L17_idf_version={xtest_bert_score.__version__}(hug_trans={ht_version})-rescaled_fast-tokenizer",
         )
 
     def test_multi_refs(self):
         cands = ["I like lemons."]
         refs = [["I am proud of you.", "I love lemons.", "Go go go."]]
-        P_mul, R_mul, F_mul = bert_score.score(
+        P_mul, R_mul, F_mul = xtest_bert_score.score(
             cands,
             refs,
             batch_size=3,
@@ -165,7 +165,7 @@ class TestScore(unittest.TestCase, CustomAssertions):
             lang="en",
             rescale_with_baseline=True,
         )
-        P_best, R_best, F_best = bert_score.score(
+        P_best, R_best, F_best = xtest_bert_score.score(
             cands,
             [refs[0][1]],
             batch_size=3,
@@ -187,7 +187,7 @@ class TestScore(unittest.TestCase, CustomAssertions):
             ["I am proud of you.", "Go go go.", "Go", "Go to school"],
             ["test"],
         ]
-        P_mul, R_mul, F_mul = bert_score.score(
+        P_mul, R_mul, F_mul = xtest_bert_score.score(
             cands,
             refs,
             batch_size=3,
@@ -201,7 +201,7 @@ class TestScore(unittest.TestCase, CustomAssertions):
         "temporary disabled along with commented model 'scibert-scivocab-uncased' in utils.model2layers"
     )
     def test_score_en_sci(self):
-        (P, R, F), hash_code = bert_score.score(
+        (P, R, F), hash_code = xtest_bert_score.score(
             cands, refs, lang="en-sci", return_hash=True
         )
 
@@ -212,7 +212,7 @@ class TestScore(unittest.TestCase, CustomAssertions):
 
         self.assertEqual(
             hash_code,
-            f"scibert-scivocab-uncased_L8_no-idf_version={bert_score.__version__}(hug_trans={ht_version})",
+            f"scibert-scivocab-uncased_L8_no-idf_version={xtest_bert_score.__version__}(hug_trans={ht_version})",
         )
 
 

@@ -9,7 +9,7 @@ import torch
 from scipy.stats import pearsonr
 from tqdm.auto import tqdm, trange
 
-import bert_score
+import xtest_bert_score
 
 wmt17_sys_to_lang_pairs = [
     "cs-en",
@@ -138,7 +138,7 @@ def main():
 
     print(args.model)
     for model_type in args.model:
-        scorer = bert_score.scorer.BERTScorer(model_type=model_type, idf=args.idf)
+        scorer = xtest_bert_score.scorer.BERTScorer(model_type=model_type, idf=args.idf)
         results = defaultdict(dict)
         for lang_pair in tqdm(args.lang_pairs):
             scores, gold_scores = get_wmt17_sys_bert_score(
