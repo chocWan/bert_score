@@ -88,7 +88,8 @@ class BERTScorer:
             self._model_type = model_type
 
         if num_layers is None:
-            self._num_layers = model2layers[self.model_type]
+            model_name = model_type.split('/')[-1]
+            self._num_layers = model2layers[model_name]
         else:
             self._num_layers = num_layers
 
